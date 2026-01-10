@@ -31,6 +31,7 @@ setTimeout(() => {
     clearInterval(intervalId);
 }, 10 * 1100);
 
+
 // let count = 0;
 // let myInterval = setInterval(function () {
 //     console.log("Körning: " + count);
