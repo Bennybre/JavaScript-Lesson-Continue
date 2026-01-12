@@ -23,7 +23,6 @@ console.log("Hello World");
         // Hämta från en url
         // const url = "https://cdn2.thecatapi.com/images/ebv.jpg";
 
-        // Måste man skriva GET med stora bokstäver?
         // xhr.open("GET", url);
         xhr.open("GET", "data.txt");
         xhr.addEventListener("load", () => {
