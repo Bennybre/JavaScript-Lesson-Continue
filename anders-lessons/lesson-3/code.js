@@ -58,23 +58,7 @@ n2Code.textContent = coin;
 // Promise objektet i JavaScript i en funktion
 // Objektet kan hantera ett löfte om en korrekt lösning (resolve), eller ett alternativ (reject)
 
-function flipCoin() {
-    return new Promise((resolve, reject) => {
 
-
-        // Använd setTimeout för att de ska ta tid...
-        setTimeout(() => {
-
-            // resolve(1);
-
-            const randomFloat = Math.random();
-            const coin = randomFloat <= 0.5 ? "Krona" : "Klave";
-            resolve(coin);
-
-        }, 3 * 1000);
-
-    });
-}
 
 flipCoin().then((result) => {
     console.log("Result", result);
@@ -86,38 +70,7 @@ flipCoin().then((result) => {
 // ------------------------------------
 
 //  Visuell variant av funktionen flipCoin
-function flipCoinV() {
 
-
-    // Returnera promise - ett framtida löfte om ett resultat
-    return new Promise((resolve, reject) => {
-
-        // Visuellt: Visa att värdet växlar mellan krona och klave.
-        // setInterval, spara unikt id så att metoden kan avbrytas.
-
-        const intervalId = setInterval(() => {
-            n4Code.textContent = Math.random() <= 0.5 ? "krona" : "klave";
-        }, 100);
-
-        // Math.random alltid tal mellan 0-1.
-        const randomFloat = Math.random();
-        const coin = randomFloat <= 0.5 ? "krona" : "klave";
-
-        // Framtida resusltat med nyckelordet resolve
-
-        // Se till att funktionen tar en viss tid...
-        setTimeout(function () {
-
-            // Avbryt intervallet så att vi kan visa det slutliga svaret
-            clearInterval(intervalId);
-            resolve(coin);
-
-        }, Math.random() * 1000 * 5);
-    });
-
-
-
-}
 
 // Anropa funktionen för att se resultatet.
 flipCoinV().then((result) => {
@@ -222,4 +175,55 @@ function rollDice() {
 
         }, Math.random() * 3000 );
     });
+}
+
+// n3
+function flipCoin() {
+    return new Promise((resolve, reject) => {
+
+
+        // Använd setTimeout för att de ska ta tid...
+        setTimeout(() => {
+
+            // resolve(1);
+
+            const randomFloat = Math.random();
+            const coin = randomFloat <= 0.5 ? "Krona" : "Klave";
+            resolve(coin);
+
+        }, 3 * 1000);
+
+    });
+}
+
+// n4
+function flipCoinV() {
+
+
+    // Returnera promise - ett framtida löfte om ett resultat
+    return new Promise((resolve, reject) => {
+
+        // Visuellt: Visa att värdet växlar mellan krona och klave.
+        // setInterval, spara unikt id så att metoden kan avbrytas.
+
+        const intervalId = setInterval(() => {
+            n4Code.textContent = Math.random() <= 0.5 ? "krona" : "klave";
+        }, 100);
+
+        // Math.random alltid tal mellan 0-1.
+        const randomFloat = Math.random();
+        const coin = randomFloat <= 0.5 ? "krona" : "klave";
+
+        // Framtida resusltat med nyckelordet resolve
+
+        // Se till att funktionen tar en viss tid...
+        setTimeout(function () {
+
+            // Avbryt intervallet så att vi kan visa det slutliga svaret
+            clearInterval(intervalId);
+            resolve(coin);
+
+        }, Math.random() * 1000 * 5);
+    });
+
 }
