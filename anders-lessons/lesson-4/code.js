@@ -93,6 +93,9 @@ let questions = [
 button.addEventListener("click", () => {
 
 
+    divResult.innerHTML = "";
+
+    
     // en iteration av det som finns i array questions
     questions.forEach(element => {
         console.log(element);
@@ -156,16 +159,31 @@ function renderAnswers(answers) {
         // skapa ett li element
         const li = document.createElement("li");
 
-        // lägg till text i li elementet
-        // li.innerText = answer.type + " (" + answer.size + ")";
-        li.innerText = answer.type;
+        const figure = document.createElement("figure");
+        const img = new Image();
+        img.src = answer.img;
+        img.alt = "";
+        figure.appendChild(img);
 
-        // om egenskapen 'size' finns med så ska det anges inom en parentes
-        // använd metoden som kontrollerar ifall en egneskap finns
-        // hasOwnProperty()
+        let figcaption = document.createElement("figcaption");
+        figcaption.classList = "type";
+        figcaption.textContent = answer.type;
+        figure.appendChild(figcaption);
+
         if (answer.hasOwnProperty("size")) {
-            li.innerText += ` (${answer.size})`;
+            const span = document.createElement("span");
+            span.classList = "size";
+            span.textContent = answer.size;
+            figure.appendChild(span);
         }
+
+        figcaption = document.createElement("figcaption");
+        figcaption.classList = "attribute";
+        figcaption.textContent = answer.attribute;
+        figure.appendChild(figcaption);
+        
+        li.appendChild(figure);
+
 
         // placera li elementet innanför ul elementet
         ul.appendChild(li);
@@ -187,3 +205,7 @@ function renderAnswers(answers) {
 
 //         ul.appendChild(li);
 //     });
+
+// Konvertera JavaScript array questions till JSON format
+
+const jsonData = JSON.stringify(questions);
