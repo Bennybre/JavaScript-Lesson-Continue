@@ -10,9 +10,24 @@ let obj = {
     question: "What animal lives in the forest?",
     // answers: "Moose, Deer, Beaver"
     answers: [
-        { type: "Moose" },
-        { type: "Deer" },
-        { type: "Beaver" }
+        {
+            type: "Moose",
+            size: "Big",
+            img: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Moose_in_Grand_Teton_National_Park_3_%288007698498%29.jpg",
+            attribute: "Tony Hisgett from Birmingham, UK, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons"
+        },
+        {
+            type: "Deer",
+            size: "Medium",
+            img: "https://upload.wikimedia.org/wikipedia/commons/8/85/Chital_in_Sanjay_Dubri_Tiger_Reserve_December_2024_by_Tisha_Mukherjee_01.jpg",
+            attribute: "Tisha Mukherjee, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons"
+        },
+        {
+            type: "Beaver",
+            size: "Small",
+            img: "https://upload.wikimedia.org/wikipedia/commons/6/6b/American_Beaver.jpg",
+            attribute: "Steve from Washington, DC, USA, CC BY-SA 2.0 <https://creativecommons.org/licenses/by-sa/2.0>, via Wikimedia Commons"
+        }
     ]
 };
 
@@ -21,14 +36,50 @@ let questions = [
     obj,
     {
         question: "What birds lives in the forest?",
-        // answers: "Moose, Deer, Beaver"
         answers: [
-            { type: "Eagle" },
-            { type: "Owl" },
-            { type: "Woodpeckers" }
+            {
+                type: "Eagle",
+                size: "Big",
+                img: "https://upload.wikimedia.org/wikipedia/commons/6/67/Bald_Eagle_Head_sq.jpg",
+                attribute: "Martin Falbisoner, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons"
+            },
+            {
+                type: "Owl",
+                size: "Medium",
+                img: "https://upload.wikimedia.org/wikipedia/commons/0/08/Eastern_Barn_Owl_-_Tyto_javanica_stertens_-_India_%281%29_01.jpg",
+                attribute: "Nikhilmore nimo, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons"
+            },
+            {
+                type: "Woodpeckers",
+                size: "Small",
+                img: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Acorn_woodpecker_holding_a_nut_in_its_beak-0225.jpg",
+                attribute: "© Frank Schulenburg"
+            }
         ]
     },
-    {}
+    {
+        question: "What lives in this pond?",
+        answers: [
+            {
+                type: "Largemouth Bass",
+                size: "Small",
+                img: "https://upload.wikimedia.org/wikipedia/commons/8/8b/1351_largemouth_bass_%28Micropterus_salmoides%29_300_dpi.jpg",
+                attribute: "Robert Pos, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons"
+            },
+            {
+                type: "Pike",
+                size: "Medium",
+                img: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Esox_Lucius.JPG",
+                attribute: "Georg Mittenecker, CC BY-SA 2.5 <https://creativecommons.org/licenses/by-sa/2.5>, via Wikimedia Commons"
+            },
+            {
+                type: "Gator",
+                size: "Big",
+                img: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Two_american_alligators.jpg",
+                attribute: "Mfield, Matthew Field - http://www.photography.mattfield.com, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons"
+            }
+        ]
+    }
 ];
 
 
@@ -37,66 +88,102 @@ let questions = [
 
 
 
-// Händelselyssnare
-// --------------------------------------------
-button.addEventListener("click", (e) => {
+// händelselyssnare
+// ------------------------------------------
+button.addEventListener("click", () => {
 
-    // En iteration av det som finns i array questions
+
+    // en iteration av det som finns i array questions
     questions.forEach(element => {
         console.log(element);
 
-        // Visualisera!
+        // visualisera!
 
         // 1. Visa frågan i ett h4 element
-        // Skapa ett h4 element
-        // Lägg till texten i h4 element
-        // Visa på sidan
+        // skapa ett h4 element
+        // lägg till texten i h4 elementet
+        // visa på sidan
+        // lösning: använd en metod som kan anropas
 
-        renderQuestion(element.question);
+        renderQuestion(element.question)
+
 
         // 2. Visa ul li med svarsalternativ
-        // Skapa ett omslutande ul element
-        // För varje svarsalternativ:
-        // Skapa ett omslutande li element
-        // Lägg till textenb till li element
-        // Visa på sidan
+        // skapa ett omslutande ul element
+        // för varje svarsalternativ:
+        // skapa ett omslutande li element
+        // lägg till texten till li elementet
+        // visa på sidan
 
-        renderAnswers(element.answers)
+        renderAnswers(element.answers);
 
 
 
     });
+
+
 });
 
 
 
 
-// Funktioner
-// --------------------------------------------
+// funktioner
+// ------------------------------------------
 
 function renderQuestion(question) {
+
     const h4 = document.createElement("h4");
     h4.textContent = question;
 
     divResult.appendChild(h4);
 }
 
+
 function renderAnswers(answers) {
 
-    // Answers är en array
+    // answers är en array
+    console.log(answers);
+
+    // kontrollera att det är en array innan iteration
+    if (!Array.isArray(answers)) { return }
+
+    // skapa ett omslutande ul element
     const ul = document.createElement("ul");
 
-    if (answers) {
-        answers.forEach((item) => {
-            const li = document.createElement("li");
+    // en iteration över alla svar
+    answers.forEach(answer => {
 
-            li.textContent = item.type;
+        // skapa ett li element
+        const li = document.createElement("li");
 
-            ul.appendChild(li);
-        });
+        // lägg till text i li elementet
+        // li.innerText = answer.type + " (" + answer.size + ")";
+        li.innerText = answer.type;
 
-        divResult.appendChild(ul);
-    }
+        // om egenskapen 'size' finns med så ska det anges inom en parentes
+        // använd metoden som kontrollerar ifall en egneskap finns
+        // hasOwnProperty()
+        if (answer.hasOwnProperty("size")) {
+            li.innerText += ` (${answer.size})`;
+        }
 
-    
+        // placera li elementet innanför ul elementet
+        ul.appendChild(li);
+    });
+
+    // visa på sidan
+    divResult.appendChild(ul);
+
 }
+
+
+// Min lösning
+// if (answers) {
+//     answers.forEach((answer) => {
+//         const li = document.createElement("li");
+
+//         // li.textContent = answer.type + "(" + answer.size + ")";
+//         li.textContent = answer.type;
+
+//         ul.appendChild(li);
+//     });
