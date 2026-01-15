@@ -48,6 +48,3 @@
 // });
 
 
-// Konvertera JavaScript array questions till JSON format
-
-const jsonData = JSON.stringify(questions);
