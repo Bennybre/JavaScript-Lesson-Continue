@@ -93,7 +93,11 @@ let questions = [
 button.addEventListener("click", () => {
 
 
-    divResult.innerHTML = "";
+    // För att undvika att redan befintliga element finns kan man emd fördel
+    // se till att listan är tom
+    // divResult.innerHTML = "";
+    // eller bättre, använd som argument once enl följande syntax:
+    // }, {once: true});
 
     
     // en iteration av det som finns i array questions
@@ -125,9 +129,26 @@ button.addEventListener("click", () => {
     });
 
 
+}, {once: true});
+
+
+
+
+// En överordnad händelselyssnare med dat som kallas för event delegation
+// Målet är att toggla klassen highlight för ett figure element...
+divResult.addEventListener('click', (e) => {
+
+
+    // Visa vilket element som registrerade ett klick
+    console.log("Följande element registrerar ett click: ", e.target);
+
+    // Växla klassens highlight om figure elemenet är angivet.
+    // Kan man kontrollera om ex img elemenet har ett omslutande figure element?
+    const figureElement = e.target.closest("figure");
+    console.log("FigureElemenet", figureElement);
+    figureElement.classList.toggle("highlight");
+
 });
-
-
 
 
 // funktioner
@@ -137,6 +158,9 @@ function renderQuestion(question) {
 
     const h4 = document.createElement("h4");
     h4.textContent = question;
+    h4.addEventListener('click', (e) => {
+        console.log("Elementet h4 noterar 'click'...");
+    });
 
     divResult.appendChild(h4);
 }
@@ -156,10 +180,22 @@ function renderAnswers(answers) {
     // en iteration över alla svar
     answers.forEach(answer => {
 
+
         // skapa ett li element
         const li = document.createElement("li");
 
         const figure = document.createElement("figure");
+
+        // Lägg till händelselyssnae swå att vi kan ex markera figure elementet visuellt.
+        // Den här möjligheten att ex markera något kan också skapas med event delegation
+        // Det betyder att man anger en överordnad lyssnare
+        // som kontrollerar vilket element som händelsen gäller
+        // figure.addEventListener('click', (e) => {
+
+        //     // Toggla/växla en klass
+        //     figure.classList.toggle("highlight");
+        // });
+
         const img = new Image();
         img.src = answer.img;
         img.alt = "";

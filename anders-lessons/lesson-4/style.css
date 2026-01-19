@@ -69,3 +69,7 @@ body {
 img {
     width: 100px;
 }
+
+figure.hightlight {
+    background-color: green;
+}
