@@ -3,6 +3,8 @@
 
 const divResult = document.querySelector("#result");
 const button = document.querySelector("button");
+const modalWindow = document.getElementById("modal");
+const closeModalElement = document.getElementById("closeModal");
 
 // Variablar
 // --------------------------------------------
@@ -88,7 +90,7 @@ let questions = [
 
 
 
-// händelselyssnare
+// Händelselyssnare
 // ------------------------------------------
 button.addEventListener("click", () => {
 
@@ -99,7 +101,7 @@ button.addEventListener("click", () => {
     // eller bättre, använd som argument once enl följande syntax:
     // }, {once: true});
 
-    
+
     // en iteration av det som finns i array questions
     questions.forEach(element => {
         console.log(element);
@@ -129,9 +131,23 @@ button.addEventListener("click", () => {
     });
 
 
-}, {once: true});
+}, { once: true });
 
 
+
+closeModalElement.addEventListener('click', (e) => {
+
+    // enklast är att hänvisa till parent element tidigare i koden
+    // under rubriken DOM element
+    // men, man kan oxå välja ut elementet med lite JavaScript
+    // eftersom alla element finns i en hierarki...
+
+    const parentElement = e.target.parentElement;
+
+    // vad ska vi göra - det ska inte tas bort utan döljas och ev tömmas på innehåll
+    parentElement.classList = "hidden";
+
+});
 
 
 // En överordnad händelselyssnare med dat som kallas för event delegation
@@ -148,10 +164,29 @@ divResult.addEventListener('click', (e) => {
     console.log("FigureElemenet", figureElement);
     figureElement.classList.toggle("highlight");
 
+
+    // visa modal fönster för detaljer om man klickar på bildtexten
+    // eftersom fönstret förvalt har klassen hidden (display: none)
+    // kan man förslagsvis ta bort den klassen - vips - fönstret syns
+
+    // if (e.target)
+    // modalWindow.classList = "";
+    // Vad har elememtet för klasser?
+    console.log(e.target.classList);
+
+    const list = e.target.classList;
+    console.log(list);
+
+    if (e.target.classList.contains("attribution")) {
+        console.log("klassen attribution finnns");
+        modalWindow.classList = "";
+    }
+
+
 });
 
 
-// funktioner
+// Funktioner
 // ------------------------------------------
 
 function renderQuestion(question) {
@@ -217,7 +252,7 @@ function renderAnswers(answers) {
         figcaption.classList = "attribute";
         figcaption.textContent = answer.attribute;
         figure.appendChild(figcaption);
-        
+
         li.appendChild(figure);
 
 
